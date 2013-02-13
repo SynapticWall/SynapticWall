@@ -1,7 +1,7 @@
 # Synaptic Wall Project
 
 ## Instructions
-* Press *1* to switch to _Creation_ mode. Click to create a soma. Click and drag existing somas to change their location. Click on the outer ring around a Soma to change it's threshold level. 
+* Press *1* to switch to _Creation_ mode. Click to create a soma. Click and drag existing somas to change their location. Click on the outer ring around a Soma to change it's threshold level.
 * Press *2* to switch to _Deletion_ mode. Click to delete (*not implemented*)
 * Press *3* to switch to _Interaction_ mode. Click and drag on the sliders to change properties. Click on empty areas to create selection boxes. When at least one object is selected, the control panel that can control all corresponding elements in the selection
 * Press *m* to show a zoom lense, move the mouse around to move the focus of the lense
@@ -15,7 +15,7 @@
 
 ### Enviroment
 #### [SynapticWallBase.pde][]
-This file sets up the environment and delegates all the events to the global [SynapticWall][] object and sets up the [Grid][] used to place objects and define paths
+This file sets up the environment and delegates all the events to the global [Synaptic_Wall][] object and sets up the [Grid][] used to place objects and define paths
 
 #### [SynapticWall.pde][]
 The controller for all inputs such as mouse interactions and keypress events. It handles state transitions and keeps track of what current mode (creation, deletion, interaction) it's in and determines the result of each input depending on context. It's also responsible for sending interaction events down to the [ObjectCollection][], the [Grid][], the [ControlPanel][], as well as other temporary objects being created.
@@ -58,7 +58,7 @@ Class that extends [Cell][] that contains Initiator specific behavior and   rend
 Class that extends [ControllableShape][] that specifies how a Synapse updates its appearance and state based on its firing timer
 
 #### [Path.pde][]
-*Abstract* Class that extends [Interactive][] that details how Paths ([Axons][Axon] and [Dendrites][Dendrite]) process signals, junctions, and events 
+*Abstract* Class that extends [Interactive][] that details how Paths ([Axons][Axon] and [Dendrites][Dendrite]) process signals, junctions, and events
 
 ##### [Axon.pde][]
 Class that extends [Path][] that contains Axon specific behavior logic and rendering code

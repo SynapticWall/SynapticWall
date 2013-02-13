@@ -1,7 +1,7 @@
 boolean gDebug = false;
 int gIDCount = 0;
 
-SynapticWall sw;
+Synaptic_Wall sw;
 Grid gGrid;
 boolean gSmoothPaths;
 
@@ -16,7 +16,7 @@ void setup() {
   // noLoop();
   noStroke();
 
-  sw = new SynapticWall();
+  sw = new Synaptic_Wall();
   gGrid = new Grid(Constants.WIDTH, Constants.GRID_RESOLUTION);
   gSmoothPaths = false;
 }

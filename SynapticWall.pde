@@ -1,4 +1,4 @@
-public class SynapticWall extends Constants {
+public class Synaptic_Wall extends Constants {
 
   private boolean gMagnify;
   private int gCurrentMode;
@@ -16,7 +16,7 @@ public class SynapticWall extends Constants {
   private PVector gIndicator;
   private PVector gIndicator2;
 
-  public SynapticWall() {
+  public Synaptic_Wall() {
     gCurrentMode = CREATION;
     gCurrentModeLabel = "CREATION";
     gMagnify = false;
