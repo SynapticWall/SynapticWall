@@ -20,6 +20,7 @@ abstract static class Constants {
   static final int CREATION    = 0;
   static final int DELETION    = 1;
   static final int INTERACTION = 2;
+  static final int HANDWRITING = 3;
 
   // Types
   static final int INITIATOR   = 0;

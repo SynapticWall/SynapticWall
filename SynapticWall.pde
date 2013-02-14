@@ -15,6 +15,53 @@ public class Synaptic_Wall extends Constants {
   private Path gCurrPath;
   private PVector gIndicator;
   private PVector gIndicator2;
+  
+  ArrayList<ArrayList<PVector>> shapes = new ArrayList<ArrayList<PVector>>();
+  ArrayList<ArrayList<PVector>> paths = new ArrayList<ArrayList<PVector>>();
+  ArrayList<PVector> current = new ArrayList<PVector>();
+  ArrayList<Circle> circles = new ArrayList<Circle>();
+  
+  class Circle {
+    float x, y , r;
+    Circle(float x, float y, float r) {
+      this.x = x;
+      this.y = y;
+      this.r = r;
+    }
+    void show() {
+      pushStyle();
+      fill(255, 100);
+      stroke(0);
+      ellipse(x, y, r, r);
+      popStyle();
+    }
+  }
+   
+  void drawShape(ArrayList<PVector> shape) {
+    beginShape();
+    for (PVector p : shape) {
+      // ellipse(p.x, p.y, 5, 5);
+      curveVertex(p.x, p.y);
+    }
+    endShape(CLOSE);
+  }
+   
+  void drawPath(ArrayList<PVector> path) {
+    pushStyle();
+    noFill();
+    beginShape();
+    for (PVector p : path) {
+      // ellipse(p.x, p.y, 5, 5);
+      curveVertex(p.x, p.y);
+    }
+    endShape();
+    popStyle();
+  }
+   
+
+  void addpt(float x, float y) {
+    current.add(new PVector(x, y));
+  }
 
   public Synaptic_Wall() {
     gCurrentMode = CREATION;
@@ -121,6 +168,18 @@ public class Synaptic_Wall extends Constants {
       String fps = nf(frameRate, 2, 2) + " FPS";
       text(fps, width - 60, 20);
     popStyle();
+    
+    if (gCurrentMode == HANDWRITING){
+      fill(255);
+      drawPath(current);
+      for(ArrayList<PVector> p : shapes)
+        drawShape(p);
+      for(ArrayList<PVector> p : paths)
+        drawPath(p);
+     
+      for (Circle c : circles)
+        c.show();
+    }
   }
 
   private void clear() {
@@ -192,6 +251,10 @@ public class Synaptic_Wall extends Constants {
       if (!gObjs.onMouseDown(mouseX, mouseY, key, keyCode) && !gCPanel.onMouseDown(mouseX, mouseY)) {
         gSelector.beginSelection(mouseX, mouseY);
       }
+    }
+    else if (gCurrentMode == HANDWRITING) {
+        current = new ArrayList<PVector>();
+        current.add(new PVector(mouseX, mouseY));
     }
     else {
       // Do nothing
@@ -278,6 +341,9 @@ public class Synaptic_Wall extends Constants {
         gObjs.onMouseDragged(mouseX, mouseY);
         gCPanel.onMouseDragged(mouseX, mouseY);
       }
+    }
+    else if (gCurrentMode == HANDWRITING) {
+      addpt(mouseX, mouseY);
     }
     else {
       // Do nothing
@@ -373,6 +439,31 @@ public class Synaptic_Wall extends Constants {
       gObjs.onMouseUp(mouseX, mouseY);
       gCPanel.onMouseUp(mouseX, mouseY);
     }
+    else if (gCurrentMode == HANDWRITING) {
+      if (current.size() > 0 ) {
+        if (PVector.dist(current.get(0), current.get(current.size() - 1)) < 50) {
+          float x = 0, y = 0;
+          for (PVector p: current) {
+            x += p.x;
+            y += p.y;
+          }
+          x /= current.size();
+          y /= current.size();
+     
+          PVector mid = new PVector(x, y, 0);
+          float r =0;
+          for (PVector p: current) {
+            r += PVector.dist(p, mid);
+          }
+          r /= current.size();
+          circles.add(new Circle(x, y , r));
+          shapes.add(current);
+        }
+        else {
+          paths.add(current);
+        }
+      }
+    }
 
     redraw();
   }
@@ -390,6 +481,10 @@ public class Synaptic_Wall extends Constants {
       case '3':
         gCurrentMode = INTERACTION;
         gCurrentModeLabel = "INTERACTION";
+        break;
+      case '4':
+        gCurrentMode = HANDWRITING;
+        gCurrentModeLabel = "HANDWRITING";
         break;
       case 'm':
         gMagnify = !gMagnify;
