@@ -246,6 +246,7 @@ public class Synaptic_Wall extends Constants {
         selected = gObjs.getSelected().get(0);
         gObjs.remove(selected);
       }
+      else gSelector.beginSelection(mouseX, mouseY);
     }
     else if (gCurrentMode == INTERACTION) {
       if (!gObjs.onMouseDown(mouseX, mouseY, key, keyCode) && !gCPanel.onMouseDown(mouseX, mouseY)) {
@@ -340,6 +341,11 @@ public class Synaptic_Wall extends Constants {
       else {
         gObjs.onMouseDragged(mouseX, mouseY);
         gCPanel.onMouseDragged(mouseX, mouseY);
+      }
+    }
+    else if (gCurrentMode == DELETION) {
+      if (gSelector.isSelecting()) {
+        gSelector.updateSelection(mouseX, mouseY);
       }
     }
     else if (gCurrentMode == HANDWRITING) {
@@ -438,6 +444,14 @@ public class Synaptic_Wall extends Constants {
       }
       gObjs.onMouseUp(mouseX, mouseY);
       gCPanel.onMouseUp(mouseX, mouseY);
+    }
+    else if (gCurrentMode == DELETION) {
+      if (gSelector.isSelecting()) {
+        gSelector.endSelection(mouseX, mouseY);
+        gObjs.selectArea(gSelector.getStart(), gSelector.getEnd());
+        ArrayList<Interactive> obj = gObjs.getSelected();
+        for (Interactive i : obj) gObjs.remove(i);
+      } 
     }
     else if (gCurrentMode == HANDWRITING) {
       if (current.size() > 0 ) {

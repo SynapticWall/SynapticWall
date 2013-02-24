@@ -1,7 +1,8 @@
 public abstract class Cell extends ControllableShape {
   protected ArrayList<Path> fAxons;
   protected ArrayList<Path> fDendrites;
-
+  private int fRemoved;
+  
   protected int fTotalTime, fLastFired, fNumFired;
   protected float fAvgFiringRate, fCurrentFiringRate;
 
@@ -14,6 +15,7 @@ public abstract class Cell extends ControllableShape {
     fNumFired = 0;
     fAvgFiringRate = 0;
     fCurrentFiringRate = 0;
+    fRemoved = 0;
   }
 
   protected void fire() {
@@ -37,6 +39,22 @@ public abstract class Cell extends ControllableShape {
 
   public float getCurrentFiringRate() {
     return fCurrentFiringRate;
+  }
+  
+  public void setRemoved(){
+    fRemoved = 1;  
+  }
+  
+  public int getRemoved(){
+    return fRemoved;  
+  }
+  
+  void removeAxon(Axon a){
+    fAxons.remove(a);  
+  }
+  
+  void removeDendrite(Dendrite d){
+    fDendrites.remove(d);  
   }
 
   protected abstract boolean fireSignals();

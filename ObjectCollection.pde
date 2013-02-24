@@ -11,6 +11,19 @@ public class ObjectCollection extends Collection {
     fSynapses = new ArrayList<Synapse>();
     fInitiators = new ArrayList<Initiator>();
   }
+  
+  public void draw(){
+    for (Path p: fAxons)
+      p.draw();
+    for (Synapse s: fSynapses)
+      s.draw(); 
+    for (Path p: fDendrites)
+      p.draw();
+    for (Initiator i: fInitiators)
+      i.draw();
+    for (Soma s: fSomas)
+      s.draw();
+  }
 
   public void add(Interactive s) {
     if (s != null) {
@@ -39,25 +52,54 @@ public class ObjectCollection extends Collection {
     if (s != null) {
       switch(s.getType()) {
         case AXON:
+        {
+          Path p = (Path)s;
+          Cell src = (Cell)p.getSrc();
+          if (src.getRemoved()==0) src.removeAxon((Axon)s);
           fAxons.remove((Axon)s);
-        case DENDRITE:
-          fDendrites.remove((Dendrite)s);
           remove((Interactive)((Path)s).getDest());
+          break;
+        }
+        case DENDRITE:
+        {
+          Path pp = (Path)s;
+          Cell dest = (Cell)pp.getDest();
+          if (dest.getRemoved()==0) dest.removeDendrite((Dendrite)s);
+          fDendrites.remove((Dendrite)s);
           Path path = (Path)s;
           ArrayList<Path> paths = path.getConnectedPaths();
           for (Path p : paths)
             remove((Interactive)p);
           break;
+        }
         case SYNAPSE:
+        {
           fSynapses.remove((Synapse)s);
           Synapse ss = (Synapse)s;
           remove((Interactive)(ss.getDendrite()));
+          Axon ax = (Axon)ss.getAxon();
+          fAxons.remove(ax);
+          fObjs.remove((Interactive) ax);
           break;
+        }
         case SOMA:
-          fSomas.remove((Soma)s);
-        case INITIATOR:
-          fInitiators.remove((Initiator)s);
+        {
           Cell cell = (Cell)s;
+          cell.setRemoved();
+          fSomas.remove((Soma)s);
+          ArrayList<Path> axons = cell.getAxons();
+          for (Path p : axons)
+            remove((Interactive)p);
+          ArrayList<Path> dendrites = cell.getDendrites();
+          for (Path p : dendrites)
+            remove((Interactive)p);   
+          break;
+        }
+        case INITIATOR:
+        {
+          Cell cell = (Cell)s;
+          cell.setRemoved();
+          fInitiators.remove((Initiator)s);
           ArrayList<Path> axons = cell.getAxons();
           for (Path p : axons)
             remove((Interactive)p);
@@ -65,10 +107,12 @@ public class ObjectCollection extends Collection {
           for (Path p : dendrites)
             remove((Interactive)p);
           break;
+        }  
       }
       fObjs.remove(s);
     }
   }
+
 
   public boolean onMouseDown(float x, float y, int key, int keyCode) {
     for (int i = fObjs.size()-1; i>=0; i--) {
