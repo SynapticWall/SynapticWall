@@ -103,6 +103,20 @@ public class Synaptic_Wall extends Constants {
   private void drawAndUpdateContent() {
     drawBackground(BG_COLOR);
     gObjs.drawAndUpdate();
+    //marks the selected objects and adds a soma/initiator in the middle of the controller
+    //this will be changed
+    if (gCurrentMode==CREATION || gCurrentMode==INTERACTION) { 
+      gObjs.markSelected();
+      if (gObjs.fSelectedObjs.size() > 0){
+        Interactive i = gObjs.fSelectedObjs.get(0);
+        if (i.getType()==SOMA) {
+          gObjs.drawLabelSoma();
+        }
+        else if (i.getType()==INITIATOR) {
+          gObjs.drawLabelInitiator();
+        }
+      }
+    }
     gCPanel.draw();
     if (gCurrShape != null)
       gCurrShape.drawAndUpdate();
@@ -251,7 +265,10 @@ public class Synaptic_Wall extends Constants {
     else if (gCurrentMode == INTERACTION) {
       if (!gObjs.onMouseDown(mouseX, mouseY, key, keyCode) && !gCPanel.onMouseDown(mouseX, mouseY)) {
         gSelector.beginSelection(mouseX, mouseY);
+      
       }
+      //checkSelected will update selected so that it contains only somas or only initiators
+      gObjs.checkSelected();
     }
     else if (gCurrentMode == HANDWRITING) {
         current = new ArrayList<PVector>();
@@ -441,6 +458,7 @@ public class Synaptic_Wall extends Constants {
       if (gSelector.isSelecting()) {
         gSelector.endSelection(mouseX, mouseY);
         gObjs.selectArea(gSelector.getStart(), gSelector.getEnd());
+        gObjs.checkSelected();
       }
       gObjs.onMouseUp(mouseX, mouseY);
       gCPanel.onMouseUp(mouseX, mouseY);
@@ -451,6 +469,7 @@ public class Synaptic_Wall extends Constants {
         gObjs.selectArea(gSelector.getStart(), gSelector.getEnd());
         ArrayList<Interactive> obj = gObjs.getSelected();
         for (Interactive i : obj) gObjs.remove(i);
+        gObjs.resetSelection();
       } 
     }
     else if (gCurrentMode == HANDWRITING) {
