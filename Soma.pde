@@ -158,11 +158,8 @@ class Soma extends Cell {
     }
 
     double value = u0 + (ur - u0) * Math.exp(-timeSinceLastFiring / rc) + q/c * 1/(1-taus/rc) * seps;
-    
-    //if (value >= th) { // generate spike
-    if (value >= getMaxThreshold()) { // MaxThreshold used for firing threshold
-      //value = ur;
-      value = getMinThreshold() + value - getMaxThreshold(); //MinThreshold used for reset potential
+    if (value >= th) { // generate spike
+      value = ur;
       fire();
     }
 

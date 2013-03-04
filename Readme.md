@@ -18,7 +18,7 @@
 #### [SynapticWallBase.pde][]
 This file sets up the environment and delegates all the events to the global [Synaptic_Wall][] object and sets up the [Grid][] used to place objects and define paths
 
-#### [SynapticWall.pde][]/Applications/XAMPP/xamppfiles/htdocs/github/SynapticWall/data/Readme.md
+#### [SynapticWall.pde][]
 The controller for all inputs such as mouse interactions and keypress events. It handles state transitions and keeps track of what current mode (creation, deletion, interaction) it's in and determines the result of each input depending on context. It's also responsible for sending interaction events down to the [ObjectCollection][], the [Grid][], the [ControlPanel][], as well as other temporary objects being created.
 
 #### [Selector.pde][]
