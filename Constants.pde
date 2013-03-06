@@ -2,8 +2,8 @@ abstract static class Constants {
   static final int MAX = 99999;
   static final int MIN = -99999;
 
-  static final int WIDTH  = 900;
-  static final int HEIGHT = 700;
+  static final int WIDTH  = 800;
+  static final int HEIGHT = 800;
   static final int HALFWIDTH = WIDTH / 2;
   static final int HALFHEIGHT = HEIGHT / 2;
   static final int QUARTERWIDTH = WIDTH / 4;
@@ -32,11 +32,6 @@ abstract static class Constants {
   static final int CONTROL     = 6;
   static final int GRID        = 7;
   static final int PLOT        = 8;
-  
-  //Slider Types
-  static final int SPEED_S = 1;
-  static final int LENGTH_S = 2;
-  static final int DECAY_S = 3;
 
   // Color Settings
   static final color BG_COLOR           = 0xFF4C4C4C;

@@ -1,5 +1,4 @@
 public abstract class Slider extends Control {
-  
   protected float fSize, fThickness, fMin, fMax, fValue, fBegin, fEnd, fSlider;
   protected String fLabel;
 
@@ -18,7 +17,7 @@ public abstract class Slider extends Control {
   public float getValue() {
     return fValue;
   }
-  
+
   public float getSliderPosition() {
     return fSlider;
   }

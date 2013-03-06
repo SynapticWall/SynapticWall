@@ -27,8 +27,8 @@ class Soma extends Cell {
     fDecay = SIGNAL_DEFAULT_DECAY;
     fType = EXCITATORY;
 
-    fSpeedSlider = new CircularSlider(1,
-      650, 580, CIRCULAR_SLIDER_RADIUS,
+    fSpeedSlider = new CircularSlider(
+      fLoc.x, fLoc.y, CIRCULAR_SLIDER_RADIUS,
       0, TWO_PI/3,
       fSpeed, 1, SIGNAL_MAX_SPEED,
       SPEED, this
@@ -36,14 +36,14 @@ class Soma extends Cell {
     fControls.add(fSpeedSlider);
 
     fLengthSlider = new DiscreteCircularSlider(
-      650, 580, CIRCULAR_SLIDER_RADIUS,
+      fLoc.x, fLoc.y, CIRCULAR_SLIDER_RADIUS,
       TWO_PI/3, 2 * TWO_PI/3,
       fLength, 1, SIGNAL_MAX_LENGTH,
       LENGTH, this
     );
     fControls.add(fLengthSlider);
-    fDecaySlider = new CircularSlider(3,
-      650, 580, CIRCULAR_SLIDER_RADIUS,
+    fDecaySlider = new CircularSlider(
+      fLoc.x, fLoc.y, CIRCULAR_SLIDER_RADIUS,
       2 * TWO_PI/3, TWO_PI,
       fDecay, SIGNAL_MAX_DECAY, 1.0, //1.0 = no decay
       DECAY, this
@@ -193,7 +193,7 @@ class Soma extends Cell {
     noStroke();
     color c = lerpColor(fHighlightColor, HIGHLIGHT_COLOR, fThresholdSlider.getValue());
     ring(s, fLoc.x, fLoc.y, SOMA_RING_WIDTH, c);
-    //String fps = nf(frameRate, 2, 2) + " FPS";
+
     popStyle();
   }
 

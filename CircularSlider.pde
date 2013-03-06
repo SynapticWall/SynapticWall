@@ -1,34 +1,15 @@
 public class CircularSlider extends Slider {
-  
-  protected int fType;
   protected int fState;
   protected static final int SLIDER = 0;
   protected static final int BEGIN = 1;
   protected static final int END = 2;
-  
-  public float getVal(){
-    return fValue;  
-  }
-  
+
   public CircularSlider(float x, float y, float size, float begin, float end, float val, float min, float max, int id, Controllable target) {
-    this(0, x, y, size, SLIDER_BAR_WIDTH, begin, end, val, min, max, id, target);
-  }
-  
-  public CircularSlider(int typeS,float x, float y, float size, float begin, float end, float val, float min, float max, int id, Controllable target) {
-    this(typeS, x, y, size, SLIDER_BAR_WIDTH, begin, end, val, min, max, id, target);
+    this(x, y, size, SLIDER_BAR_WIDTH, begin, end, val, min, max, id, target);
   }
 
-  public CircularSlider(int typeS,float x, float y, float size, float thickness, float begin, float end, float val, float min, float max, int id, Controllable target) {
+  public CircularSlider(float x, float y, float size, float thickness, float begin, float end, float val, float min, float max, int id, Controllable target) {
     super(x, y, size, thickness, begin, end, val, min, max, id, target);
-    fType = typeS;
-    fState = SLIDER;
-    // Circular Sliders are initially hidden
-    fVisible = false;
-  }
-  
-   public CircularSlider(float x, float y, float size, float thickness, float begin, float end, float val, float min, float max, int id, Controllable target) {
-    super(x, y, size, thickness, begin, end, val, min, max, id, target);
-    fType = 0;
     fState = SLIDER;
     // Circular Sliders are initially hidden
     fVisible = false;

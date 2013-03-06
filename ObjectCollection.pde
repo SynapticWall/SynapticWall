@@ -3,8 +3,6 @@ public class ObjectCollection extends Collection {
   private ArrayList<Soma> fSomas;
   private ArrayList<Initiator> fInitiators;
   private ArrayList<Synapse> fSynapses;
-  private LabelSoma fLabelSoma;
-  private LabelInitiator fLabelInitiator;
 
   public ObjectCollection() {
     fAxons = new ArrayList<Path>();
@@ -12,29 +10,6 @@ public class ObjectCollection extends Collection {
     fSomas = new ArrayList<Soma>();
     fSynapses = new ArrayList<Synapse>();
     fInitiators = new ArrayList<Initiator>();
-    fLabelSoma = new LabelSoma(650,580);
-    fLabelInitiator = new LabelInitiator(650,580);
-  }
-  
-  void checkSelected(){
-    if (fSelectedObjs.size()!=0){
-      Interactive a = fSelectedObjs.get(0);
-      Interactive b = fSelectedObjs.get(fSelectedObjs.size()-1);
-      if (a.getType()!=b.getType()){
-        for (Interactive s : fSelectedObjs)
-          if (s.getType()!=b.getType()) s.deselect();
-        resetSelection();
-        fSelectedObjs.add(b);
-      }
-    } 
-  }
-  
-  void drawLabelSoma(){
-    fLabelSoma.draw();
-  }
-  
-  void drawLabelInitiator(){
-    fLabelInitiator.draw(); 
   }
   
   public void draw(){
@@ -138,20 +113,6 @@ public class ObjectCollection extends Collection {
     }
   }
 
-
-  public void markSelected(){
-    PVector p;
-    for (Interactive i:fSelectedObjs){
-        if (i.getType()==SOMA || i.getType()==INITIATOR){
-        p = i.getLoc();
-        pushStyle();
-          fill(150,0,0,100);
-          ellipseMode(CENTER);
-          ellipse(p.x,p.y,38,38);
-        popStyle();
-      }
-    }  
-  }
 
   public boolean onMouseDown(float x, float y, int key, int keyCode) {
     for (int i = fObjs.size()-1; i>=0; i--) {
