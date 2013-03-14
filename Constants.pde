@@ -2,8 +2,8 @@ abstract static class Constants {
   static final int MAX = 99999;
   static final int MIN = -99999;
 
-  static final int WIDTH  = 800;
-  static final int HEIGHT = 800;
+  static final int WIDTH  = 900;
+  static final int HEIGHT = 700;
   static final int HALFWIDTH = WIDTH / 2;
   static final int HALFHEIGHT = HEIGHT / 2;
   static final int QUARTERWIDTH = WIDTH / 4;

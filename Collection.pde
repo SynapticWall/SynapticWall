@@ -73,23 +73,25 @@ public class Collection extends Constants {
   }
 
   public boolean onMouseDown(float x, float y) {
+    boolean ok = false;
     for (int i = fObjs.size()-1; i>=0; i--) {
       Interactive curr = fObjs.get(i);
       if (curr.fVisible && curr.onMouseDown(x, y)) {
-        return true;
+        ok = true;;
       }
     }
-    return false;
+    return ok;
   }
 
   public boolean onMouseDragged(float x, float y) {
+    boolean ok = false;
     for (int i = fObjs.size()-1; i>=0; i--) {
       Interactive curr = fObjs.get(i);
       if (curr.fVisible && curr.onMouseDragged(x, y)) {
-        return true;
+        ok = true;
       }
     }
-    return false;
+    return ok;
   }
 
   public boolean onMouseMoved(float x, float y) {

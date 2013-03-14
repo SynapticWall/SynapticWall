@@ -103,6 +103,20 @@ public class Synaptic_Wall extends Constants {
   private void drawAndUpdateContent() {
     drawBackground(BG_COLOR);
     gObjs.drawAndUpdate();
+    //marks the selected objects and adds a soma/initiator in the middle of the controller
+    //this will be changed
+    if (gCurrentMode==CREATION || gCurrentMode==INTERACTION) { 
+      gObjs.markSelected();
+      if (gObjs.fSelectedObjs.size() > 0){
+        Interactive i = gObjs.fSelectedObjs.get(0);
+        if (i.getType()==SOMA) {
+          gObjs.drawLabelSoma();
+        }
+        else if (i.getType()==INITIATOR) {
+          gObjs.drawLabelInitiator();
+        }
+      }
+    }
     gCPanel.draw();
     if (gCurrShape != null)
       gCurrShape.drawAndUpdate();
@@ -252,6 +266,7 @@ public class Synaptic_Wall extends Constants {
       if (!gObjs.onMouseDown(mouseX, mouseY, key, keyCode) && !gCPanel.onMouseDown(mouseX, mouseY)) {
         gSelector.beginSelection(mouseX, mouseY);
       }
+      gObjs.checkSelected();
     }
     else if (gCurrentMode == HANDWRITING) {
         current = new ArrayList<PVector>();
@@ -487,14 +502,17 @@ public class Synaptic_Wall extends Constants {
       case '1':
         gCurrentMode = CREATION;
         gCurrentModeLabel = "CREATION";
+        gObjs.deselectAll();
         break;
       case '2':
         gCurrentMode = DELETION;
         gCurrentModeLabel = "DELETION";
+        gObjs.deselectAll();
         break;
       case '3':
         gCurrentMode = INTERACTION;
         gCurrentModeLabel = "INTERACTION";
+        gObjs.deselectAll();
         break;
       case '4':
         gCurrentMode = HANDWRITING;
