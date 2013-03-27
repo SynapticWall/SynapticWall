@@ -40,10 +40,10 @@ public class ObjectCollection extends Collection {
   public void draw(){
     for (Path p: fAxons)
       p.draw();
-    for (Synapse s: fSynapses)
-      s.draw(); 
     for (Path p: fDendrites)
       p.draw();
+    for (Synapse s: fSynapses)
+      s.draw(); 
     for (Initiator i: fInitiators)
       i.draw();
     for (Soma s: fSomas)
