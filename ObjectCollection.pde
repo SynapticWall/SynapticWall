@@ -31,6 +31,10 @@ public class ObjectCollection extends Collection {
   
   void drawLabelSoma(){
     fLabelSoma.draw();
+    if (fSelectedObjs.size()==1) {
+      Soma a = (Soma)fSelectedObjs.get(0);
+      a.drawAuxiliarySlider();
+    } 
   }
   
   void drawLabelInitiator(){

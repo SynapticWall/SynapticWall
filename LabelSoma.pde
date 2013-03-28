@@ -19,15 +19,14 @@ public class LabelSoma extends Constants {
   private Soma auxiliarySoma;
   
   public LabelSoma(int x, int y){
-    x3 = x -140;
-    y3 = y+10;
-    x1 = x + 80;
-    y1 = y -40;
+    x1 = x -170;
+    y1 = y+10;
+    x3 = x + 80;
+    y3 = y -40;
     x2 = x +10;
     y2 = y +90;
     fFont = createFont("Arial",11,true);
     auxiliarySoma = new Soma(x,y);
-    
   }
   
   void roundRect(int x, int y, int w, int h, int r) {
@@ -71,7 +70,7 @@ public class LabelSoma extends Constants {
     fill(0,0,0,0);
     roundRect(x3-14, y3-17, fLength, fHeight, fRadius);
     popStyle();
-    auxiliarySoma.draw();
+    auxiliarySoma.drawAuxiliary();
   }
   
 }

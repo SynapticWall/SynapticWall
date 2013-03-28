@@ -21,10 +21,10 @@ public class LabelInitiator extends Constants {
   public LabelInitiator(int x, int y){
     x3 = x -140;
     y3 = y+10;
-    x1 = x + 80;
-    y1 = y -40;
-    x2 = x +10;
-    y2 = y +90;
+    x2 = x + 80;
+    y2 = y -40;
+    x1 = x +10;
+    y1 = y +90;
     fFont = createFont("Arial",11,true);
     auxiliaryInitiator = new Initiator(650,580,SOMA_SIZE,EX_COLOR);
     

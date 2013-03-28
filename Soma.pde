@@ -199,6 +199,33 @@ class Soma extends Cell {
 
     popStyle();
   }
+  
+  public void drawAuxiliarySlider(){
+    fThresholdSlider.drawBackground(650,580);
+    fThresholdSlider.drawForeground(650,580);
+  }
+  
+  public void drawAuxiliary(){
+    pushStyle();
+    float s = SOMA_SIZE - SOMA_RING_WIDTH;
+    fill(fColor);
+    ellipse(fLoc.x, fLoc.y, s, s);
+    drawControlDisplays();
+    noStroke();
+    color c = SHADOW_COLOR;
+    ring(s, fLoc.x + SHADOW_OFFSETX, fLoc.y + SHADOW_OFFSETY, SOMA_RING_WIDTH, c);
+    popStyle();
+    pushStyle();
+
+    s = SOMA_SIZE - SOMA_RING_WIDTH;
+    fill(fColor);
+    noStroke();
+    c = fHighlightColor;
+    ring(s, fLoc.x, fLoc.y, SOMA_RING_WIDTH, c);
+
+    popStyle();
+  
+  }
 
   public void flipColor() {
     super.flipColor();

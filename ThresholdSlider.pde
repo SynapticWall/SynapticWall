@@ -86,6 +86,13 @@ public class ThresholdSlider extends CircularSlider {
     drawThresholdArc(fLoc.x, fLoc.y, THRESHOLD_SLIDER_RADIUS, fBegin, fEnd);
     popStyle();
   }
+  
+  public void drawBackground(float x,float y) {
+    pushStyle();
+    fill(SLIDER_BG_COLOR);
+    drawThresholdArc(x, y, THRESHOLD_SLIDER_RADIUS, fBegin, fEnd);
+    popStyle();
+  }
 
   public void drawForeground() {
     pushStyle();
@@ -104,6 +111,26 @@ public class ThresholdSlider extends CircularSlider {
           ? THRESHOLD_POSITIVE_HIGHLIGHT
           : THRESHOLD_POSITIVE_COLOR);
     drawThresholdArc(fLoc.x, fLoc.y, THRESHOLD_SLIDER_RADIUS, fEnd - fOffset, fEnd);
+   popStyle();
+  }
+  
+  public void drawForeground(float x, float y) {
+    pushStyle();
+    fill(HIGHLIGHT_COLOR);
+    if (fSlider > 0)
+      drawThresholdArc(x, y, THRESHOLD_SLIDER_RADIUS, -fOffset, fSlider);
+    else if (fSlider < 0)
+      drawThresholdArc(x, y, THRESHOLD_SLIDER_RADIUS, fSlider, fOffset);
+    else
+      drawThresholdArc(x, y, THRESHOLD_SLIDER_RADIUS, -fOffset, fOffset);
+    fill((fHover && (fState == BEGIN))
+          ? THRESHOLD_NEGATIVE_HIGHLIGHT
+          : THRESHOLD_NEGATIVE_COLOR);
+    drawThresholdArc(x, y, THRESHOLD_SLIDER_RADIUS, fBegin, fBegin + fOffset);
+    fill((fHover && (fState == END))
+          ? THRESHOLD_POSITIVE_HIGHLIGHT
+          : THRESHOLD_POSITIVE_COLOR);
+    drawThresholdArc(x, y, THRESHOLD_SLIDER_RADIUS, fEnd - fOffset, fEnd);
    popStyle();
   }
 
