@@ -41,27 +41,31 @@ class Soma extends Cell {
     fType = EXCITATORY;
 
     fSpeedSlider = new CircularSlider(
-      650, 580, CIRCULAR_SLIDER_RADIUS,
+      SLIDER_X, SLIDER_Y, CIRCULAR_SLIDER_RADIUS,
       0, TWO_PI/3,
       fSpeed, 1, SIGNAL_MAX_SPEED,
       SPEED, this
     );
     fControls.add(fSpeedSlider);
+    fSpeedSlider.setMovable(false);
 
     fLengthSlider = new DiscreteCircularSlider(
-      650, 580, CIRCULAR_SLIDER_RADIUS,
+      SLIDER_X, SLIDER_Y, CIRCULAR_SLIDER_RADIUS,
       TWO_PI/3, 2 * TWO_PI/3,
       fLength, 1, SIGNAL_MAX_LENGTH,
       LENGTH, this
     );
     fControls.add(fLengthSlider);
+    fLengthSlider.setMovable(false);
+    
     fDecaySlider = new CircularSlider(
-      650, 580, CIRCULAR_SLIDER_RADIUS,
+      SLIDER_X, SLIDER_Y, CIRCULAR_SLIDER_RADIUS,
       2 * TWO_PI/3, TWO_PI,
       fDecay, SIGNAL_MAX_DECAY, 1.0, //1.0 = no decay
       DECAY, this
     );
     fControls.add(fDecaySlider);
+    fDecaySlider.setMovable(false);
 
     fThresholdSlider = new ThresholdSlider(
       x, y, THRESHOLD_SLIDER_RADIUS,
@@ -214,8 +218,8 @@ class Soma extends Cell {
   }
   
   public void drawAuxiliarySlider(){
-    fThresholdSlider.drawBackground(650,580);
-    fThresholdSlider.drawForeground(650,580);
+    fThresholdSlider.drawBackground(SLIDER_X,SLIDER_Y);
+    fThresholdSlider.drawForeground(SLIDER_X,SLIDER_Y);
   }
   
   public void drawAuxiliary(){

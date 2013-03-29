@@ -9,7 +9,6 @@ public abstract class Slider extends Control {
     setSliderBounds(begin, end);
     setValueRange(min, max);
     setValue(val);
-
     fLabel = "";
     fVisible = true;
   }

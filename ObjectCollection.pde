@@ -12,8 +12,8 @@ public class ObjectCollection extends Collection {
     fSomas = new ArrayList<Soma>();
     fSynapses = new ArrayList<Synapse>();
     fInitiators = new ArrayList<Initiator>();
-    fLabelSoma = new LabelSoma(650,580);
-    fLabelInitiator = new LabelInitiator(650,580);
+    fLabelSoma = new LabelSoma(SLIDER_X,SLIDER_Y);
+    fLabelInitiator = new LabelInitiator(SLIDER_X,SLIDER_Y);
   }
   
   void checkSelected(){

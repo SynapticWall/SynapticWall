@@ -26,7 +26,7 @@ public class LabelInitiator extends Constants {
     x1 = x +10;
     y1 = y +90;
     fFont = createFont("Arial",11,true);
-    auxiliaryInitiator = new Initiator(650,580,SOMA_SIZE,EX_COLOR);
+    auxiliaryInitiator = new Initiator(x,y,SOMA_SIZE,EX_COLOR);
     
   }
   

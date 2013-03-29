@@ -29,26 +29,31 @@ public class Initiator extends Cell implements TimerSubscriber {
     float controlSize = fSize + 3 * SLIDER_BAR_WIDTH;
 
     fRhythmicitySlider = new CircularSlider(
-      650, 580, controlSize,
+      SLIDER_X, SLIDER_Y, controlSize,
        0, TWO_PI/3,
        fRhythmicity, 0, MAX_RHYTHMICITY,
        RHYTHMICITY, this
      );
     fControls.add(fRhythmicitySlider);
+    fRhythmicitySlider.setMovable(false);
+    
     fBurstinessSlider = new DiscreteCircularSlider(
-      650, 580, controlSize,
+      SLIDER_X, SLIDER_Y, controlSize,
       TWO_PI/3, 2 * TWO_PI/3,
       fBurstiness, 1, MAX_BURSTINESS,
       BURSTINESS, this
      );
     fControls.add(fBurstinessSlider);
+    fBurstinessSlider.setMovable(false);
+    
     fFreqSlider = new CircularSlider(
-      650, 580, controlSize,
+      SLIDER_X, SLIDER_Y, controlSize,
       2 * TWO_PI/3, TWO_PI,
       fFreq, DEFAULT_FREQUENCY, MAX_FREQUENCY,
       FREQUENCY, this
      );
     fControls.add(fFreqSlider);
+    fFreqSlider.setMovable(false);
 
     fTimer = new Timer(this, round(1000/fFreq), 0.5);
     fTimer.reset();
