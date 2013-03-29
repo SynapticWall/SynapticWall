@@ -10,6 +10,19 @@ class Soma extends Cell {
   private static final int DECAY = 3;
   private static final int THRESHOLD = 4;
 
+
+  public float getSpeed(){
+    return fSpeed; 
+  }
+  
+  public float getLength(){
+    return fLength;  
+  }
+  
+  public float getDecay(){
+    return fDecay;
+  }
+  
   private int fType;
   Soma(float x, float y) {
     this(
@@ -216,13 +229,11 @@ class Soma extends Cell {
     ring(s, fLoc.x + SHADOW_OFFSETX, fLoc.y + SHADOW_OFFSETY, SOMA_RING_WIDTH, c);
     popStyle();
     pushStyle();
-
     s = SOMA_SIZE - SOMA_RING_WIDTH;
     fill(fColor);
     noStroke();
     c = fHighlightColor;
     ring(s, fLoc.x, fLoc.y, SOMA_RING_WIDTH, c);
-
     popStyle();
   
   }

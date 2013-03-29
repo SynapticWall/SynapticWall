@@ -4,7 +4,6 @@ public class Synapse extends ControllableShape implements TimerSubscriber {
   private Path fAxon, fDendrite;
   private Cell fInput, fOutput;
   private Timer fTimer;
-
   public Synapse(Path axon, float x, float y, color cc) {
     this(axon, x, y, cc, SYNAPSE_STRENGTH);
   }
@@ -86,8 +85,8 @@ public class Synapse extends ControllableShape implements TimerSubscriber {
       fDendrite.addSignal(new PostsynapticPotential(
         // fLatestSignal.fSpeed,
         SIGNAL_DEFAULT_SPEED,
-        fLatestSignal.fLength,
-        fLatestSignal.fDecay,
+        ((Soma)fOutput).getLength(),
+        ((Soma)fOutput).getDecay(),
         // fLatestSignal.fStrength * fStrength,
         fLatestSignal.fStrength,
         fDendrite
