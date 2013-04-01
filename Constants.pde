@@ -65,11 +65,11 @@ abstract static class Constants {
   static float SOMA_RING_WIDTH         = 10 / SCALE;
 
   static final float SOMA_MAX_THRESHOLD      = 3.0;
-  //static final float SOMA_INIT_POS_THRESHOLD = SOMA_MAX_THRESHOLD * 0.75;
-  //static final float SOMA_INIT_NEG_THRESHOLD = SOMA_MAX_THRESHOLD * -0.75;
+  static final float SOMA_INIT_POS_THRESHOLD = SOMA_MAX_THRESHOLD * 0.75;
+  static final float SOMA_INIT_NEG_THRESHOLD = SOMA_MAX_THRESHOLD * -0.75;
   // New soma thresholds to fit standard model parameters
-  static final float SOMA_INIT_POS_THRESHOLD = 1.0;
-  static final float SOMA_INIT_NEG_THRESHOLD = -0.5;
+  //static final float SOMA_INIT_POS_THRESHOLD = 1.0;
+  //static final float SOMA_INIT_NEG_THRESHOLD = -0.5;
 
   // Path Settings
   static float PATH_WIDTH          = 8.0 / SCALE;

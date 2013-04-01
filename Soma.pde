@@ -170,16 +170,33 @@ class Soma extends Cell {
       if (eps <= 0.005) {
         fReceivedSignals.remove(s);
       }
+      if (s.fStrength == 0) {
+        s.fStrength = s.PSP();
+      }
       seps += s.fStrength * eps;
+      
+      //println(s.fStrength);
       // float val = Util.pulse(s.fStrength, diff, actualLength);
     }
-
-    double value = u0 + (ur - u0) * Math.exp(-timeSinceLastFiring / rc) + q/c * 1/(1-taus/rc) * seps;
+    
+    int cellt = this.getType(); // Cell type constant, either -1 (for an IPSP) or +1 (for an EPSP)
+    
+    double taut = this.getThresholdValue(); //Threshold constant (ranging from 1-4, modified through the threshold slider)
+    double taus = this.getLength();  //Duration constant (ranging from 1-19, modified through the duration slider)
+    double taud = this.getDecay(); //Decay variable. An exponential decay variable, linked to a slider with a range of 0 to 1.
+    double taul = 1;//LEARNING_K; //Learning constant (ranging from 0-2).
+    double tpeak = 0.7;
+    
+    // Simple tempral model
+    //double value = u0 + (ur - u0) * Math.exp(-timeSinceLastFiring / rc) + q/c * 1/(1-taus/rc) * seps;
+    
+    //Actual Temporal + Spatial model
+    double value = this.getType() * taud * taul * (u0 + (ur - u0) * exp(-timeSinceLastFiring / rc) + q/c * 1/(1-taus/rc) / tpeak * seps);
     
     //if (value >= th) { // generate spike
     if (value >= getMaxThreshold()) { // MaxThreshold used for firing threshold
       //value = ur;
-      value = getMinThreshold() + value - getMaxThreshold(); //MinThreshold used for reset potential
+      value = ur + value - getMaxThreshold(); //MinThreshold used for reset potential
       fire();
     }
 
@@ -266,6 +283,7 @@ class Soma extends Cell {
   protected boolean fireSignals() {
     if ((millis() - fLastFired) >= SOMA_FIRING_DELAY) {
       float val = (fType == EXCITATORY) ? SIGNAL_DEFAULT_STRENGTH : -SIGNAL_DEFAULT_STRENGTH;
+      //print(val);
       for (Path p : fAxons)
         p.addSignal(new ActionPotential(fSpeed, fLength, fDecay, val, p));
       return true;

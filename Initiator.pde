@@ -13,15 +13,15 @@ public class Initiator extends Cell implements TimerSubscriber {
 
   public Initiator(float x, float y, float size, color cc) {
     this(x, y, size, cc, DEFAULT_RHYTHMICITY,
-         DEFAULT_BURSTINESS, DEFAULT_FREQUENCY);
+         DEFAULT_BURSTINESS, DEFAULT_FREQUENCY, EXCITATORY);
   }
 
-  public Initiator(float x, float y, float size, color cc, float rhythmicity, int burstiness, float frequency) {
+  public Initiator(float x, float y, float size, color cc, float rhythmicity, int burstiness, float frequency, int type) {
     super(x, y, size, cc);
     fRhythmicity = rhythmicity;
     fBurstiness = burstiness;
     fFreq = frequency;
-    fType = EXCITATORY;
+    fType = type;
 
     fFiringQueue = new int[0]; // Using append() and subset() is probably inefficient
 
@@ -69,7 +69,8 @@ public class Initiator extends Cell implements TimerSubscriber {
           SIGNAL_DEFAULT_SPEED,
           SIGNAL_DEFAULT_LENGTH,
           SIGNAL_DEFAULT_DECAY,
-          SIGNAL_DEFAULT_STRENGTH,
+          (this.fType == EPSP ? -SIGNAL_DEFAULT_STRENGTH : SIGNAL_DEFAULT_STRENGTH),
+          //SIGNAL_DEFAULT_STRENGTH,
           p));
     return true;
   }

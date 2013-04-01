@@ -27,6 +27,16 @@ abstract class Signal extends Drawable {
     fFiringTime = 0;
     fFired = false;
   }
+  
+  public int PSP() {
+    if (this.fType == EPSP) {
+      return 1;
+    } else if (this.fType == IPSP) {
+      return -1;
+    } else {
+      return 0;
+    }
+  }
 
   public int getType() {
     return SIGNAL;
