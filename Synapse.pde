@@ -4,6 +4,15 @@ public class Synapse extends ControllableShape implements TimerSubscriber {
   private Path fAxon, fDendrite;
   private Cell fInput, fOutput;
   private Timer fTimer;
+  private float fNorm,fRate,fTime;
+  private CircularSlider fNormSlider,fTimeSlider,fRateSlider;
+  protected ArrayList<Control> fControls;
+  
+  private final int RATE = 0;
+  private final int TIME = 1;
+  private final int NORM = 2;
+  private final int RANGE = 3;
+  
   public Synapse(Path axon, float x, float y, color cc) {
     this(axon, x, y, cc, SYNAPSE_STRENGTH);
   }
@@ -19,6 +28,43 @@ public class Synapse extends ControllableShape implements TimerSubscriber {
     fDendrite = null;
     fOutput = null;
     fTimer = new Timer(this, SYNAPSE_TIMING, 0.5);
+    fControls = new ArrayList<Control>();
+    
+    float controlSize = fSize + 3 * SLIDER_BAR_WIDTH;
+    fNormSlider = new CircularSlider(
+      SLIDER_X, SLIDER_Y, controlSize,
+      0, TWO_PI/3,
+      fNorm, 0, 1.0,
+      NORM, this
+     );
+    fControls.add(fNormSlider);
+    fTimeSlider = new DiscreteCircularSlider(
+      SLIDER_X, SLIDER_Y, controlSize,
+      TWO_PI/3, 2 * TWO_PI/3,
+      fTime, 0, 1,
+      TIME, this
+     );
+    fControls.add(fTimeSlider);
+    fRateSlider = new DiscreteCircularSlider(
+      SLIDER_X, SLIDER_Y, controlSize,
+      2 * TWO_PI/3, TWO_PI,
+      fRate, 0, 1,
+      RATE, this
+     );
+     //all arguments except x,y and target will be replaced
+     //I am currently not using this slider 
+     LinearSlider slider = new LinearSlider(SLIDER_X-220, SLIDER_Y-6, 150, 13, 100, 1, 1, 0, this);
+     fControls.add(slider);
+     
+    fControls.add(fRateSlider);
+    
+    fRateSlider.setMovable(false);
+    fTimeSlider.setMovable(false);
+    fNormSlider.setMovable(false);
+    fRateSlider.setVisible(true);
+    fTimeSlider.setVisible(true);
+    fNormSlider.setVisible(true);
+
   }
 
   public int getType() {
@@ -46,7 +92,7 @@ public class Synapse extends ControllableShape implements TimerSubscriber {
     noStroke();
     color c = (fHover) ? fHighlightColor : fColor;
     ring(fSize, fLoc.x, fLoc.y, fStrength*SYNAPSE_MULT+SYNAPSE_BASE, c);
-
+    if (fSelected) drawControls();
     if (!fTimer.ended()) {
       pushStyle();
       float s = 1 - 2*abs(fTimer.getProgress() - 0.5);
@@ -57,7 +103,21 @@ public class Synapse extends ControllableShape implements TimerSubscriber {
     }
     popStyle();
   }
+  
+  public void drawControls(){
+    for (Control c:fControls){
+      c.draw();
+    }
+  }
 
+  public void drawSelected(){
+    pushStyle();
+    fill(130,0,0,100);
+    ellipseMode(CENTER);
+    ellipse(fLoc.x,fLoc.y,22,22);
+    popStyle();
+  }
+  
   public void update() {
     fTimer.update();
     if (fInput != null && fOutput != null) {

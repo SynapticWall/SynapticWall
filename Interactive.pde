@@ -47,6 +47,9 @@ public abstract class Interactive extends Drawable {
   public void deselect() {
     fSelected = false;
   }
+  
+  public void drawSelected(){
+  }
 
   public void remove() {}
 }

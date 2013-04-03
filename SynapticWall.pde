@@ -115,6 +115,9 @@ public class Synaptic_Wall extends Constants {
         else if (i.getType()==INITIATOR) {
           gObjs.drawLabelInitiator();
         }
+        else if (i.getType()==SYNAPSE){
+          gObjs.drawLabelSynapse();
+        }
       }
     }
     gCPanel.draw();

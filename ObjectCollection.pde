@@ -5,6 +5,7 @@ public class ObjectCollection extends Collection {
   private ArrayList<Synapse> fSynapses;
   LabelSoma fLabelSoma;
   LabelInitiator fLabelInitiator;
+  LabelSynapse fLabelSynapse;
 
   public ObjectCollection() {
     fAxons = new ArrayList<Path>();
@@ -14,6 +15,7 @@ public class ObjectCollection extends Collection {
     fInitiators = new ArrayList<Initiator>();
     fLabelSoma = new LabelSoma(SLIDER_X,SLIDER_Y);
     fLabelInitiator = new LabelInitiator(SLIDER_X,SLIDER_Y);
+    fLabelSynapse = new LabelSynapse(SLIDER_X,SLIDER_Y);
   }
   
   void checkSelected(){
@@ -41,6 +43,10 @@ public class ObjectCollection extends Collection {
     fLabelInitiator.draw(); 
   }
   
+  void drawLabelSynapse(){
+    fLabelSynapse.draw();
+  }
+  
   public void draw(){
     for (Path p: fAxons)
       p.draw();
@@ -54,19 +60,9 @@ public class ObjectCollection extends Collection {
       s.draw();
   }
 
-  public void markSelected(){
-    PVector p;
-    for (Interactive i:fSelectedObjs){
-        if (i.getType()==SOMA || i.getType()==INITIATOR){
-        p = i.getLoc();
-        pushStyle();
-          fill(150,0,0,100);
-          ellipseMode(CENTER);
-          ellipse(p.x,p.y,38,38);
-        popStyle();
-      }
-    }  
-  }
+   public void markSelected(){
+    for (Interactive i:fSelectedObjs) i.drawSelected();
+   }
 
   public void add(Interactive s) {
     if (s != null) {
@@ -162,7 +158,7 @@ public class ObjectCollection extends Collection {
     for (int i = fObjs.size()-1; i>=0; i--) {
       Interactive curr = fObjs.get(i);
       if (curr.onMouseDown(x, y)) {
-        if (curr.getType() == INITIATOR || curr.getType() == SOMA) {
+        if (curr.getType() == INITIATOR || curr.getType() == SOMA || curr.getType()==SYNAPSE ) {
           if (!fSelectedObjs.contains(curr) && curr.fVisible) {
             fSelectedObjs.add(curr);
             // @TODO: using selec to set selected state and trigger corresponding changes

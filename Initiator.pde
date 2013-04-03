@@ -121,6 +121,14 @@ public class Initiator extends Cell implements TimerSubscriber {
     ring(s, fLoc.x, fLoc.y, SOMA_RING_WIDTH, c);
     popStyle();
   }
+  
+  public void drawSelected(){
+    pushStyle();
+    fill(150,0,0,100);
+    ellipseMode(CENTER);
+    ellipse(fLoc.x,fLoc.y,38,38);
+    popStyle();
+  }
 
   public void flipColor() {
     super.flipColor();

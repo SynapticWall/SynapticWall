@@ -234,6 +234,14 @@ class Soma extends Cell {
     popStyle();
   }
   
+  public void drawSelected(){
+    pushStyle();
+    fill(150,0,0,100);
+    ellipseMode(CENTER);
+    ellipse(fLoc.x,fLoc.y,38,38);
+    popStyle();
+  }
+  
   public void drawAuxiliarySlider(){
     fThresholdSlider.drawBackground(SLIDER_X,SLIDER_Y);
     fThresholdSlider.drawForeground(SLIDER_X,SLIDER_Y);

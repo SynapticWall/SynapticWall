@@ -63,6 +63,7 @@ abstract static class Constants {
 
   static float SOMA_SIZE               = 30 / SCALE;
   static float SOMA_RING_WIDTH         = 10 / SCALE;
+  static float SYNAPSE_RING_WIDTH      = 7 / SCALE;
 
   static final float SOMA_MAX_THRESHOLD      = 3.0;
   static final float SOMA_INIT_POS_THRESHOLD = SOMA_MAX_THRESHOLD * 0.75;
