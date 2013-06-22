@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 static class Util {
   static color convertA(int a) { return ((a / 16 << 4) & (a % 4)) << 24; }
   static color convertR(int r) { return ((r / 16 << 4) & (r % 4)) << 16; }
@@ -95,7 +97,7 @@ static class Util {
       return new PVector[]{ptl[0], ptl[ptl.length-1]};
   }
 
-  static List<PVector> simplifyPath(List<PVector> ptl, float epsilon) {
+  static ArrayList<PVector> simplifyPath(ArrayList<PVector> ptl, float epsilon) {
     //Find the point with the maximum distance
     float dmax = 0;
     int index = 0;
@@ -108,8 +110,8 @@ static class Util {
     }
     //If max distance is greater than epsilon, recursively simplify
     if (dmax >= epsilon) {
-      List<PVector> r1 = simplifyPath(ptl.subList(0,index), epsilon);
-      List<PVector> r2 = simplifyPath(ptl.subList(index, ptl.size()), epsilon);
+      ArrayList<PVector> r1 = simplifyPath((ArrayList<PVector>)ptl.subList(0,index), epsilon);
+      ArrayList<PVector> r2 = simplifyPath((ArrayList<PVector>)ptl.subList(index, ptl.size()), epsilon);
       r1.subList(0, r1.size()-1).addAll(r2);
       return r1;
     }
