@@ -2,42 +2,13 @@
 public class LabelSynapse extends Constants {
   private int x;
   private int y;
-  private int x1;
-  private int y1;
-  private int x2;
-  private int y2;
-  private int x3;
-  private int y3;
-  private int fLength = 82;
-  private int fLargeLength = 106;
-  private int fRadius = 10;
-  private int fHeight = 23;
   private PFont fFont;  
   
   public LabelSynapse(int x, int y){
     this.x = x;
     this.y = y;  
-    x1 = x -170;
-    y1 = y + 10;
-    x3 = x + 80;
-    y3 = y -40;
-    x2 = x +10;
-    y2 = y +90;
     fFont = createFont("Arial",11,true);
   }
-  
-  void roundRect(int x, int y, int w, int h, int r) {
-
-  arc(x + r, y + h -r, r, r+2, radians(180.0), radians(270.0));
-  arc(x + w -r, y + h - r, r,r+2, radians(270.0), radians(360.0));
-  arc(x + r, y + r, r,r+2, radians(90.0), radians(180.0));
-  arc(x + w - r, y + r, r,r+2, radians(0.0), radians(90.0));
-  line(x + r, y, x + w - r, y);
-  line(x + r, y + h, x + w - r, y + h);
-  //line(x,y + r,x,y + h - r);
-  //line(x + w, y + r, x + w ,y + h - r);
-
- }
   
   public void draw (){
       pushStyle();

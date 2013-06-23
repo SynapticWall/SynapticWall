@@ -7,7 +7,7 @@ The slider does not belong to this class, they are fields of the soma class
 public class LabelSoma extends Constants {
   private float x,y;
   private float xSpeed, ySpeed, xDecay, yDecay, xDuration, yDuration;
-  private int degSpeed = 260, degDecay = 120, degDuration = 30;
+  private int degSpeed = 30, degDecay = 120, degDuration = 260;
   private String speed = new String("Speed");
   private String decay = new String("Decay");
   private String duration = new String("Duration");
@@ -21,11 +21,11 @@ public class LabelSoma extends Constants {
   public LabelSoma(int x, int y){
     this.x = x;
     this.y = y;
-    xSpeed = x + radius*sin(radians(degSpeed)) - (textWidth(speed) + textHeight);
+    xSpeed = x + radius*sin(radians(degSpeed)) ;
     ySpeed = y + radius*cos(radians(degSpeed));
     xDecay = x + radius*sin(radians(degDecay));
     yDecay = y + radius*cos(radians(degDecay));
-    xDuration = x + radius*sin(radians(degDuration));
+    xDuration = x + radius*sin(radians(degDuration)) - (textWidth(duration) + textHeight);
     yDuration = y + radius*cos(radians(degDuration));
     fFont = createFont("Arial",textHeight);
     auxiliarySoma = new Soma(x,y);
